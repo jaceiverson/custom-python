@@ -7,18 +7,20 @@ import numpy as np
 
 def ccounts(series):
     '''
-    This accepts a PD.Series object and returns a 2 column table showing
+    This accepts a PD.Series object and returns a 2 column df showing
     Value_counts and the percent of total
-    
     df['count','percent']
-    
     '''
     df=pd.DataFrame([series.value_counts(),series.value_counts(normalize=True)]).T
     df.columns=['count','percent']
     return df
 
 class CompareDF():
-
+    '''
+    This class compares 2 data frames. 
+    It will show you what has been added,removed, and altered. 
+    This will be output in a dictionary object for use.
+    '''
     def __init__(self,old_df,new_df):
         '''
         old_df: what the df looked like
@@ -41,7 +43,7 @@ class CompareDF():
         
         Indexes must be matching same length/type
         
-        Comes from
+        Based on
         https://stackoverflow.com/questions/17095101/compare-two-dataframes-and-output-their-differences-side-by-side
         '''
         
