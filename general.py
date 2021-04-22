@@ -1,8 +1,4 @@
 """
-Created on Mon Jan 25 09:47:18 2021
-
-@author: jiverson
-
 These are simple functions that I like to use across different projects
 These allow me to reuse my code and be more effective.
 They aren't anything too special, but they are useful

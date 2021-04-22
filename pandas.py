@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Thu Apr 22 15:13:37 2021
-
-@author: techseoremote2
+These are specific functions/classes pertaining to pandas
 """
 
 import pandas as pd
