@@ -1,12 +1,12 @@
 import smtplib
-from make_config import read
+from custom_python.make_config import read
 
 from email.mime.text import MIMEText
 
 def send(subject,
          message,
          recipients,
-         sender = None):
+         sender):
     
     email_txt = MIMEText('\n'.join(message))
     email_txt['Subject'] = subject
@@ -28,4 +28,8 @@ def send(subject,
     server.sendmail('testing@terakeet.com',recipients,email_txt.as_string())
     server.close()
 
-#send('GBQ',['to be done'],['iverson.jace@gmail.com'],sender = 'me jace')
+if __name__ == '__main__':
+    '''
+    send('GBQ',['to be done'],['iverson.jace@gmail.com'],sender = 'me jace')
+    '''
+    pass
