@@ -21,8 +21,6 @@ def read(filepath = 'config.ini',out = False):
     config = configparser.ConfigParser()
     
     config.read(filepath)
-
-    sections = config.sections()
     
     if out:
         for group in config.sections():
@@ -31,4 +29,5 @@ def read(filepath = 'config.ini',out = False):
                 
     return config
     
-    
+if __name__ == '__main__':
+    pass
