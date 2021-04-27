@@ -6,7 +6,8 @@ from email.mime.text import MIMEText
 def send(subject,
          message,
          recipients,
-         sender):
+         sender,
+         config_file = None):
     
     email_txt = MIMEText('\n'.join(message))
     email_txt['Subject'] = subject
@@ -17,7 +18,8 @@ def send(subject,
     #THIS pwd is from Google app passwords
     #you  need this password from your account
     #read it in through the config file
-    config_file = read()
+    if config_file == None:
+        config_file = read()
 
     email = config_file['email']['email']
     pwd = config_file['email']['pwd']
