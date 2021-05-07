@@ -115,34 +115,34 @@ class IndexCompare():
         #determine which index id is most similar and most different for each index
         for x in self.data:
             temp = self.data[x]['raw'].loc[self.data[x]['raw'].index != x].abs().sum(axis=1)
-            self.data[x]['similar'] = {'person':temp.idxmin(),'total diff':temp.min()}
-            self.data[x]['different'] = {'person':temp.idxmax(),'total diff':temp.max()}
+            self.data[x]['similar'] = {'id':temp.idxmin(),'total diff':temp.min()}
+            self.data[x]['different'] = {'id':temp.idxmax(),'total diff':temp.max()}
             self.data[x]['avg total distance'] = (self.df.loc[x] - self.df.drop(x,axis=0)).abs().sum(axis=1).mean()
 
     def _init_comparison_data(self):    
         #init all categorization dicts
-        self.most_diff = {'people':None,'total diff':None}
-        self.most_same = {'people':None,'total diff':None}
-        self.most_similar_to_all = {'person': None,'avg total distance': None}
-        self.most_different_to_all = {'person': None, 'avg total distance': None}
+        self.most_diff = {'id':None,'total diff':None}
+        self.most_same = {'id':None,'total diff':None}
+        self.most_similar_to_all = {'id': None,'avg total distance': None}
+        self.most_different_to_all = {'id': None, 'avg total distance': None}
 
     def all_categories(self):
         #find most_diff, most_same, most_similar_to_all, and most_different_to_all
         for x in self.data:
             if self.most_same['total diff'] == None or self.data[x]['similar']['total diff'] < self.most_same['total diff']:
-                self.most_same['people'] = x + ' + ' + self.data[x]['similar']['person']
+                self.most_same['id'] = x + ' + ' + self.data[x]['similar']['id']
                 self.most_same['total diff'] = self.data[x]['similar']['total diff']
                 self.most_same['avg diff'] = self.most_same['total diff'] / len(self.df.columns)
             if self.most_diff['total diff'] == None or self.data[x]['different']['total diff'] > self.most_diff['total diff']:
-                self.most_diff['people'] = x + ' + ' + self.data[x]['different']['person']
+                self.most_diff['id'] = x + ' + ' + self.data[x]['different']['id']
                 self.most_diff['total diff'] = self.data[x]['different']['total diff']
                 self.most_diff['avg diff'] = self.most_diff['total diff'] / len(self.df.columns)
                 
-            if self.most_similar_to_all['person'] == None or self.data[x]['avg total distance'] < self.most_similar_to_all['avg total distance']:
-                self.most_similar_to_all['person'] = x
+            if self.most_similar_to_all['id'] == None or self.data[x]['avg total distance'] < self.most_similar_to_all['avg total distance']:
+                self.most_similar_to_all['id'] = x
                 self.most_similar_to_all['avg total distance'] = self.data[x]['avg total distance']
-            if self.most_different_to_all['person'] == None or self.data[x]['avg total distance'] > self.most_different_to_all['avg total distance']:
-                self.most_different_to_all['person'] = x
+            if self.most_different_to_all['id'] == None or self.data[x]['avg total distance'] > self.most_different_to_all['avg total distance']:
+                self.most_different_to_all['id'] = x
                 self.most_different_to_all['avg total distance'] = self.data[x]['avg total distance']
                 
             self.stats =   {'Similar':self.most_same,
@@ -156,21 +156,19 @@ class IndexCompare():
                   .format(x,self.data[x]['similar'],self.data[x]['different']))
                 
         for y in self.stats:
-            if 'person' in self.stats[y]:
-                output = 'person'
+            if 'avg total distance' in self.stats[y].keys():
                 print('Most {}: {}\n'\
                       'Average Total Difference: {:.2f}\n'\
                       .format(y,
-                              self.stats[y][output],
+                              self.stats[y]['id'],
                               self.stats[y]['avg total distance'],)
                       )
             else:
-                output = 'people'
                 print('Most {}: {}\n'\
                       'Total Difference: {:.2f}\n'\
                       'Average Difference: {:.2f}\n'\
                       .format(y,
-                              self.stats[y][output],
+                              self.stats[y]['id'],
                               self.stats[y]['total diff'],
                               self.stats[y]['avg diff'])
                       )
