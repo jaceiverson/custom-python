@@ -58,3 +58,15 @@ def send(subject,
     #4
     server.sendmail(sender,recipients,email_txt.as_string())
     server.close()
+
+def example():
+    from custompython.make_config import read
+    def do_something():
+        pass
+    try:
+        do_something()
+        msg = "SUCCESS"
+    except:
+        msg = "ERROR"
+    config = read()
+    send("SOMETHING TEST",[msg],'example@email.com','sender@email.com',config)
