@@ -84,6 +84,17 @@ class CompareDF():
         return {'ADDED': self.add,'REMOVED': self.remove,'CHANGED':self.results}
     
 class IndexCompare():
+    '''
+    Compares column data across all index values
+    This is useful when comparing survey results, quiz scores (for specific questions)
+    Best used with small pd.DF indexes
+    
+    Accepts a pd.DF
+    
+    Call IndexCompare.run() to gather the data
+    
+    Call self.out to print the data out to console
+    '''
     def __init__(self,df):
         self.df = df
         self.data = {}
