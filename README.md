@@ -6,3 +6,4 @@ This will be split into different sections depending on the libraries that I wil
 Included libraries currently include:
 * pandas
 * configparser
+* smtp (send emails)
