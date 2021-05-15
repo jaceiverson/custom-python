@@ -1,5 +1,13 @@
 import smtplib
 from email.mime.text import MIMEText
+from pathlib import Path
+
+def email(subject,message,sender,config_file):
+    recp = pull_recp()
+    #check config file
+    if 'email' not in config_file.sections():
+        raise Exception("Verify 'email' is a section in your config file")
+    send(subject,message,recp,sender,config_file)
 
 def send(subject,
          message,
@@ -58,6 +66,42 @@ def send(subject,
     #4
     server.sendmail(sender,recipients,email_txt.as_string())
     server.close()
+
+def pull_recp(file_path = 'recipients.txt'):
+    '''
+    pulls the recipients of the email from the given filepath
+    defaults to recipients1.txt
+    '''
+    rpath = Path(file_path)
+    if rpath.exists():
+        rec = rpath.read_text()
+    else:
+        rpath.touch()
+        rec = add_recp(file_path)
+
+    if '\n' in rec:
+        return rec.split('\n')
+    elif isinstance(rec, str):
+        return [rec]
+
+def add_recp(file_path = 'recipients.txt'):
+    rpath = Path(file_path)
+    rec = rpath.read_text()
+    if rec != '':
+        print('Current Recipients')
+        for x in rec.split('\n'):
+            print(x)
+
+    while True:
+        rec += input('Email: ') + '\n'
+        if (not rec) or rec == '':
+            break
+        more = input('Another Email [y/n]: ')
+        if (not more) or more[0].lower() != 'y':
+            break
+
+    rpath.write_text(rec[:-1])
+    return rec
 
 def example():
     from custompython.make_config import read
