@@ -31,7 +31,6 @@ def pickle_read(file_name):
         data=pickle.load(f)
     return data
 
-
 def replace_text(text,
                 delimiter,
                 location,
