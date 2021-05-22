@@ -1,7 +1,6 @@
 """
-These are specific functions/classes pertaining to pandas
+These are specific functions/classes pertaining to the pandas library
 """
-
 import pandas as pd
 import numpy as np
 
