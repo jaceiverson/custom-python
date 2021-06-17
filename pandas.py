@@ -83,9 +83,9 @@ class CompareDF():
         return {'ADDED': self.add,'REMOVED': self.remove,'CHANGED':self.results}
     
     def summary(self):
-      cols = ['Total Rows in New','Rows Added','Rows Removed','Rows Changed']
-      data = [df2.shape[0],compare.added().shape[0],compare.removed().shape[0],compare.results.shape[0]]
-      return pd.DataFrame([data],columns=cols)
+        cols = ['Total Rows in New','Rows Added','Rows Removed','Rows Changed']
+        data = [df2.shape[0],compare.added().shape[0],compare.removed().shape[0],compare.results.shape[0]]
+        return pd.DataFrame([data],columns=cols)
 
 class IndexCompare():
     '''
