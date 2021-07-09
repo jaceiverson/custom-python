@@ -88,7 +88,7 @@ class CompareDF():
     
     def summary(self):
         cols = ['Total Rows in New','Rows Added','Rows Removed','Rows Changed']
-        data = [df2.shape[0],compare.added().shape[0],compare.removed().shape[0],compare.results.shape[0]]
+        data = [self.df2.shape[0],self.added().shape[0],self.removed().shape[0],self.results.shape[0]]
         return pd.DataFrame([data],columns=cols)
 
 class IndexCompare():
