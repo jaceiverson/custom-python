@@ -58,8 +58,12 @@ class CompareDF():
         changed_to = self.clean_df2.values[difference_locations]
         
         final = pd.DataFrame({'from': changed_from, 'to': changed_to},index=changed.index)
-    
-        self.results = final.dropna(how='all')
+        
+        final.dropna(how='all',inplace=True)
+
+        final['change'] = final['to'] - final['from']
+
+        self.results = final
     
     def removed(self,full=False):
         '''
